@@ -12,8 +12,22 @@ export class GifsService {
     return [...this._tagsHistory];
   }
 
-  public searchTag(tag: string): void {
+  private organizeHistory(tag: string): void {
+    tag = tag.toLowerCase();
+    // Validar si el tag existe dentro del listado
+    if (this.tagsHistory.includes(tag)) {
+      this._tagsHistory = this._tagsHistory.filter((oldTag) => oldTag !== tag);
+    }
+    // Insertar nuevo tag al inicio
     this._tagsHistory.unshift(tag);
-    console.log(this.tagsHistory);
+    // Limitar la lista de tags a 10
+    this._tagsHistory = this._tagsHistory.splice(0, 10);
+  }
+
+  public searchTag(tag: string): void {
+    // validar vacios
+    if (tag.length === 0) return;
+    // Organizar el listado de tags
+    this.organizeHistory(tag);
   }
 }
