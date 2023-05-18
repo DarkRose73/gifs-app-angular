@@ -1,6 +1,7 @@
 // ANGULAR
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 // MODULOS PERSONALES
 import { GifsModule } from './gifs/gifs.module';
@@ -11,7 +12,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [GifsModule, SharedModule, BrowserModule],
+  imports: [GifsModule, SharedModule, BrowserModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
