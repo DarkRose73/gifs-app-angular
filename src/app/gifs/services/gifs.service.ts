@@ -12,12 +12,16 @@ export class GifsService {
   private apiKey: string = 'DUSoscQeQ3uMlGT7iqyoZbJ2g23LqeDB';
   private serviceUrl: string = 'https://api.giphy.com/v1/gifs';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadLocalStorage();
+    console.log('Gif service ready');
+  }
 
   get tagsHistory() {
     return [...this._tagsHistory];
   }
 
+  // Organizar el historial de Tags
   private organizeHistory(tag: string): void {
     tag = tag.toLowerCase();
     // Validar si el tag existe dentro del listado
@@ -31,10 +35,22 @@ export class GifsService {
     this.saveLocalStorage();
   }
 
+  // Guardar el historial de tags en localStorage
   private saveLocalStorage(): void {
     localStorage.setItem('history', JSON.stringify(this._tagsHistory));
   }
 
+  // Traer el historial de tags desde el localStorage
+  private loadLocalStorage(): void {
+    // No hay data
+    if (!localStorage.getItem('history')) return;
+    // Si hay data
+    this._tagsHistory = JSON.parse(localStorage.getItem('history')!);
+    if (this.tagsHistory.length === 0) return;
+    this.searchTag(this._tagsHistory[0]);
+  }
+
+  // Buscar un tag en concreto, llamando a la API
   searchTag(tag: string): void {
     // validar vacios
     if (tag.length === 0) return;
