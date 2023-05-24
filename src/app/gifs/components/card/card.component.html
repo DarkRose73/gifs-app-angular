@@ -1,5 +1,9 @@
 <div class="card mb-2 text-center bg-dark">
-  <shared-lazy-image class="text-light"></shared-lazy-image>
+  <shared-lazy-image
+    [alt]="gif.title || 'No name'"
+    [url]="gif.images.downsized_medium.url"
+    class="text-light"
+  ></shared-lazy-image>
   <!-- <img
     [src]="gif.images.downsized_medium.url"
     [alt]="gif.title"

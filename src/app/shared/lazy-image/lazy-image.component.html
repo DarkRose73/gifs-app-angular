@@ -1,1 +1,17 @@
-<p>lazy-image works!</p>
+<div class="d-flex justify-content-center">
+  <img
+    [src]="url"
+    class="card-img-top animate__animated animate__fadeIn"
+    [alt]="alt"
+    (load)="cargando()"
+    [ngStyle]="{ display: hasLoaded ? '' : 'none' }"
+  />
+
+  <img
+    *ngIf="!hasLoaded"
+    src="assets/puff.svg"
+    height="35"
+    width="35"
+    class="mt-3"
+  />
+</div>
